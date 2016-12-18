@@ -1,0 +1,21 @@
+{
+  "name": "pdf-downloader",
+  "version": "1.0.0",
+  "description": "A basic pdf downloader/crawler",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Insane Knight",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "child_process": "^1.0.2",
+    "express": "^4.14.0",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "nedb": "^1.8.0",
+    "request": "^2.79.0",
+    "url": "^0.11.0"
+  }
+}
