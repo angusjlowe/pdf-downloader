@@ -87,4 +87,10 @@ exports.pdf_download = function(req,res) {
 
 exports.home = function(req,res) {
     res.render("home", {});
+    //reload database upon each refresh to ensure valid state
+    db.remove({}, { multi: true }, function (err,numRemoved) {
+            db.loadDatabase(function (err) {
+                // done
+            });
+    });
 };
