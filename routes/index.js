@@ -44,11 +44,17 @@ var download_pdfs = function(counter, items) {
             console.log("Getting pdf from " + link);
         };
 
-        request(options, callback).pipe(fs.createWriteStream("./downloads/" + name + (items.length - counter) + ".pdf"))
-        .on('finish', function() {
-            download_pdfs(counter-1, items);
-         });
-    }
+        //make the download request and pipe to filestream
+        var newReq;
+        try {
+           newReq = request(options, callback).pipe(fs.createWriteStream("./downloads/" + (items.length - counter) + ".pdf"));
+        }
+        finally {
+            newReq.on('finish', function() {
+                download_pdfs(counter-1, items);
+            });
+        }
+    }   
 }
 
 var main = function() {
