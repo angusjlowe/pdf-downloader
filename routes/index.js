@@ -28,6 +28,7 @@ var download_pdfs = function(counter, items) {
     } else {
         console.log("\nrequesting download\n");
         var link = items[counter].href;
+        //if last link character isn't /, add it
         if(!link.includes("http") && !link.includes("www")) {
             link = url + link;
         }
@@ -64,7 +65,7 @@ exports.pdf_download = function(req,res) {
     res.render("waiting_screen", {
         link: link
     });
-    url = "http://www.inf.ed.ac.uk/teaching/courses/inf2c-se/";
+    url = link;
     request(url, function(error,response,html) {
     var $ = cheerio.load(html); // html is the raw response string : "<html><head>.."
     var data = [];

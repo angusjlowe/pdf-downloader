@@ -1,34 +1,41 @@
-{"name":"Coursework 1.","href":"Coursework/2016/cw1.pdf","_id":"EUzdC66t0lJoVBWo"}
-{"name":"Coursework 2.","href":"Coursework/2016/cw2.pdf","_id":"fslLFy71ujFTmNVn"}
-{"name":"Team Selection\nMemo","href":"./Coursework/2016/team-selection.pdf","_id":"jXasx4yT9NdToNOP"}
-{"name":"[slides]","href":"Lectures/overview.pdf","_id":"ONb3bOKdibVygCsY"}
-{"name":"[slides]","href":"Lectures/requirements.pdf","_id":"j194tU1ie5Pncltb"}
-{"name":"[slides]","href":"Lectures/use-cases.pdf","_id":"6ZZ2rwoq3NXcok2R"}
-{"name":"\nSystem Requirements Specification","href":"http://laser.cs.umass.edu/courses/cs520-620.Spring13/documents/tokeneersystemrequirements.pdf","_id":"U2EOghsZtGTRYVyr"}
-{"name":"[slides]","href":"Lectures/design.pdf","_id":"m67MUgmBnrzymGxw"}
-{"name":"An\n  Introduction to Software Architecture","href":"http://www.cs.cmu.edu/afs/cs/project/able/ftp/intro_softarch/intro_softarch.pdf","_id":"fjEvybbE0ntYCc7e"}
-{"name":"[slides]","href":"Lectures/class.pdf","_id":"U2EKorplDpydNQrp"}
-{"name":"[slides]","href":"Lectures/interaction.pdf","_id":"DYJPrruE89RS6xWS"}
-{"name":"[slides]","href":"Lectures/patterns.pdf","_id":"VfUZOVXVPHC6WoOm"}
-{"name":"Questions","href":"Tutorials/2016/tut-1.pdf","_id":"qI7CrfkpWuiBgeM7"}
-{"name":"Notes on Answers","href":"Tutorials/2016/tut-1-ans.pdf","_id":"VwRJlBrQ2Dt0Zooa"}
-{"name":"[slides]","href":"Lectures/constructionCMSetc.pdf","_id":"aydUt6nucUXX0Rwx"}
-{"name":"[slides]","href":"Lectures/constructionGoodCode.pdf","_id":"S32cu9hvQe2mmSTI"}
-{"name":"[slides]","href":"Lectures/vv.pdf","_id":"pnIjJsEq7r0e2kRE"}
-{"name":"Questions","href":"Tutorials/2016/tut-2.pdf","_id":"RE9eBOmPemxYbz3T"}
-{"name":"Notes on Answers","href":"Tutorials/2016/tut-2-ans.pdf","_id":"viJP4PgmDXh8huka"}
-{"name":"[slides]","href":"Lectures/refactoring.pdf","_id":"Cf9AlHldOZTm5DWA"}
-{"name":"[slides]","href":"Lectures/deployment.pdf","_id":"Xu4CHYgeRtjcks6r"}
-{"name":"[slides]","href":"Lectures/bugreporting.pdf","_id":"KFR8zNFdc0q91u1F"}
-{"name":"[slides]","href":"Lectures/processes.pdf","_id":"FyBcpyzrfYUkSiNm"}
-{"name":"Questions","href":"Tutorials/2016/tut-3.pdf","_id":"tuEgGoIuiSWvzLk2"}
-{"name":"JButtonDemo","href":"Tutorials/2016/jbutton-demo.pdf","_id":"XyA13SeOeuCkVjOK"}
-{"name":"Notes on Answers","href":"Tutorials/2016/tut-3-ans.pdf","_id":"mbzP6QT8WjRrpRRC"}
-{"name":"[slides]","href":"Lectures/agile.pdf","_id":"wcx4wzJZ7h99dVkB"}
-{"name":"[slides]","href":"Lectures/riskquality.pdf","_id":"ihDzdrnSaGdBUUUc"}
-{"name":"[slides]","href":"Lectures/metrics.pdf","_id":"kWCuH6OBI2fN4FBM"}
-{"name":"[slides]","href":"Lectures/usability.pdf","_id":"cG3LWen8HZ6Ayanh"}
-{"name":"[slides]","href":"Lectures/licensing.pdf","_id":"0pksPgzxPMbXcHdE"}
-{"name":"[slides]","href":"Lectures/ethics.pdf","_id":"WO4XxI1ski4EHfYs"}
-{"name":"Questions","href":"Tutorials/2016/tut-4.pdf","_id":"BYpzf3IYdsVk9HOr"}
-{"name":"Notes on Answers","href":"Tutorials/2016/tut-4-ans.pdf","_id":"NDtKrncr5uD2JpQN"}
+{"name":"slides","href":"lectures/2016/lect01.pdf","_id":"A6MoeTnjQ3QWMg5f"}
+{"name":"slides","href":"lectures/2016/lect02.pdf","_id":"wrpgdzUirxiNDALM"}
+{"name":"slides","href":"lectures/2016/lect03.pdf","_id":"Fjqkh1BUDsq5Wql1"}
+{"name":"slides","href":"lectures/2016/lect03.pdf","_id":"3Yd3kqSFYk7FDeaE"}
+{"name":"slides","href":"lectures/2016/lect04.pdf","_id":"FY6wNYvZUtFVRcyS"}
+{"name":"slides","href":"lectures/2016/lect04.pdf","_id":"6POH5lv2TlPntGcl"}
+{"name":"more slides","href":"lectures/2016/lect05.pdf","_id":"GVFBscjmCeALwtEm"}
+{"name":"slides","href":"lectures/2016/lect05.pdf","_id":"mMtQxmAK1vhOG4Df"}
+{"name":"more slides","href":"lectures/2016/lect06.pdf","_id":"daer7wbtJ73zJrYE"}
+{"name":"slides","href":"lectures/2016/lect06.pdf","_id":"5ZsXhIwW0QvxA7Qn"}
+{"name":"more slides","href":"lectures/2016/lect06a.pdf","_id":"nAAW80yIDHJ4TcOj"}
+{"name":"slides","href":"lectures/2016/lect07.pdf","_id":"1JFevVJxxtkKRYDC"}
+{"name":"slides","href":"lectures/2016/lect09.pdf","_id":"WQiMFy8mTum1k9FK"}
+{"name":"slides","href":"lectures/2016/lect09.pdf","_id":"7u1eHRE75wqCO7gl"}
+{"name":"more slides","href":"lectures/2016/lect10.pdf","_id":"DKNAd0JbOTfPas9V"}
+{"name":"slides","href":"lectures/2016/lect07.pdf","_id":"mI1I55rqiHkzfo2q"}
+{"name":"more slides","href":"lectures/2016/lect08.pdf","_id":"SO8Wkdk5h58fV6kq"}
+{"name":"slides","href":"lectures/2016/lect08.pdf","_id":"0Q7AhAshV1p8vpcL"}
+{"name":"more slides","href":"lectures/2016/lect11.pdf","_id":"TcNEk0AAElKvYKEL"}
+{"name":"slides","href":"lectures/2016/lect11.pdf","_id":"YON29TD21IGYMghr"}
+{"name":"slides","href":"lectures/2016/lect11.pdf","_id":"uNtKovsz8bzkVeSF"}
+{"name":"slides","href":"lectures/2016/lect13.pdf","_id":"J9932HBtCFxcAWUn"}
+{"name":"slides","href":"lectures/2016/lect13.pdf","_id":"eGZLRd2jf3NQifVC"}
+{"name":"more slides","href":"lectures/2016/lect15.pdf","_id":"88PLFW9eAbN0bV6U"}
+{"name":"slides","href":"lectures/2016/lect15.pdf","_id":"WGaDPZjFUKbPLRz7"}
+{"name":"slides","href":"lectures/2016/lect15.pdf","_id":"vftw7bT0ZFI9PRAg"}
+{"name":"slides","href":"lectures/2016/lect18.pdf","_id":"g2kPP2U5tGEKWr6j"}
+{"name":"these slides","href":"reading/walker-proofs.pdf","_id":"qGBX00dW1lmUTWMR"}
+{"name":"Lab instructions","href":"tutorials/Labweek.pdf","_id":"LgrkBryBB3o7394p"}
+{"name":"p127 in Thompson","href":"Q10-p127.pdf","_id":"JHhnzu48v5dX8jDG"}
+{"name":"table of contents with page numbering","href":"http://www.nostarch.com/download/haskell_toc.pdf","_id":"afb2GVRzwtUHs4sU"}
+{"name":"here","href":"emacs.pdf","_id":"Nn4P0cQgxRChrli9"}
+{"name":"\"Get You Installed a Haskell\" handout","href":"gyiah.pdf","_id":"dbjhl9fh4lzG0G0P"}
+{"name":"here","href":"functions.pdf","_id":"9J3j14kUqrokV7mS"}
+{"name":"class test","href":"exams/classexam-2016.pdf","_id":"C6kLUenNy1oELaLt"}
+{"name":"mock exam","href":"exams/mock-2016.pdf","_id":"PyJ2OgYZqy00LYkG"}
+{"name":"first sitting","href":"exams/exam-2016-paper1.pdf","_id":"bQn96SRN1eKc4y2c"}
+{"name":"solutions","href":"exams/exam-2016-paper1-answers.pdf","_id":"1RbLq9ECzsls5zPm"}
+{"name":"second sitting","href":"exams/exam-2016-paper2.pdf","_id":"8QzvmHHMpsTpPiZe"}
+{"name":"solutions","href":"exams/exam-2016-paper2-answers.pdf","_id":"eOuLXUgrqt2JFeXb"}
+{"name":"instructions for programming exam","href":"exams/exam-instructions.pdf","_id":"Dx0E0frO23BOULH9"}
