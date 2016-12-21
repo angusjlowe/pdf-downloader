@@ -3,6 +3,7 @@
 //2) add files to zip folder
 //3) allow get request from client to download zip folder
 //4) overwrite zip folder each time app is used
+//5) allow for img downloading capability
 var request = require("request");
 var fs = require("fs");
 var cheerio = require('cheerio');
@@ -59,7 +60,10 @@ var main = function() {
 }
 
 exports.pdf_download = function(req,res) {
-    res.render("home", {});
+    var link = req.body.link;
+    res.render("waiting_screen", {
+        link: link
+    });
     url = "http://www.inf.ed.ac.uk/teaching/courses/inf2c-se/";
     request(url, function(error,response,html) {
     var $ = cheerio.load(html); // html is the raw response string : "<html><head>.."
