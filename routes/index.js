@@ -1,9 +1,10 @@
 //functionality to add: 
-//1) customizable url address file format
+//1) customizable url address _/
 //2) add files to zip folder
 //3) allow get request from client to download zip folder
 //4) overwrite zip folder each time app is used
-//5) allow for img downloading capability
+//5) customizable file format 
+//6) allow for img downloading capability
 var request = require("request");
 var fs = require("fs");
 var cheerio = require('cheerio');
@@ -15,6 +16,17 @@ var db = new neDB({
 });
 
 var url;
+
+var formatLink = function(link) {
+    var finalChar = url.substr(url.length-1);
+    if(finalChar != "/") {
+        url += "/";
+    }
+    if(!link.includes("http") && !link.includes("www")) {
+        link = url + link;
+    }
+    return link;
+}
 
 
 var download_pdfs = function(counter, items) {
@@ -28,18 +40,13 @@ var download_pdfs = function(counter, items) {
     } else {
         console.log("\nrequesting download\n");
         var link = items[counter].href;
-        //if last link character isn't /, add it
-        if(!link.includes("http") && !link.includes("www")) {
-            link = url + link;
-        }
-        var name = items[counter].name;
-        name = name.replace(/(\r\n|\n|\r)/gm,"");
+        //if last url character isn't /, add it, and check for http://www 
+        link = formatLink(link);
 
         var options = {
             uri: link,
             method: "GET"
         };
-
         var callback = function(error, response, body) {
             console.log("Getting pdf from " + link);
         };
@@ -91,17 +98,26 @@ exports.pdf_download = function(req,res) {
     console.log("Links saved to database");
     main();
     });
-
-
-
 };
 
 exports.home = function(req,res) {
-    res.render("home", {});
-    //reload database upon each refresh to ensure valid state
-    db.remove({}, { multi: true }, function (err,numRemoved) {
-            db.loadDatabase(function (err) {
-                // done
+    //check if in use
+    var isEmpty = false;
+    db.find({}, function(err, docs) {
+        if(docs.length == 0) {
+            isEmpty = true;
+        }
+        console.log("Length of database: " + docs.length);
+        if(isEmpty) {
+            res.render("home", {});
+            //reload database upon each refresh to ensure valid state
+            db.remove({}, { multi: true }, function (err,numRemoved) {
+                db.loadDatabase(function (err) {
+                    // done
+                });
             });
+        } else {
+            res.send("Sorry we're busy, please try again later");
+        }
     });
 };
