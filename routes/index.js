@@ -3,18 +3,18 @@
 //2) add files to zip folder
 //3) allow get request from client to download zip folder
 //4) overwrite zip folder each time app is used
-
 var request = require("request");
 var fs = require("fs");
 var cheerio = require('cheerio');
 var neDB = require('nedb');
 
-var url = "http://www.inf.ed.ac.uk/teaching/courses/inf2c-se/";
-
 var db = new neDB({
     filename: 'my.db',
     autoload: true
 });
+
+var url;
+
 
 var download_pdfs = function(counter, items) {
     if(counter < 0) {
@@ -27,7 +27,7 @@ var download_pdfs = function(counter, items) {
     } else {
         console.log("\nrequesting download\n");
         var link = items[counter].href;
-        if(!link.includes("http")) {
+        if(!link.includes("http") && !link.includes("www")) {
             link = url + link;
         }
         var name = items[counter].name;
@@ -58,7 +58,10 @@ var main = function() {
     });
 }
 
-request(url, function(error,response,html) {
+exports.pdf_download = function(req,res) {
+    res.render("home", {});
+    url = "http://www.inf.ed.ac.uk/teaching/courses/inf2c-se/";
+    request(url, function(error,response,html) {
     var $ = cheerio.load(html); // html is the raw response string : "<html><head>.."
     var data = [];
     $("a") // find every <a> in this html
@@ -76,4 +79,12 @@ request(url, function(error,response,html) {
     db.insert(data)
     console.log("Links saved to database");
     main();
-});
+    });
+
+
+
+};
+
+exports.home = function(req,res) {
+    res.render("home", {});
+};
