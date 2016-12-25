@@ -1,14 +1,15 @@
-//functionality to add: 
+//functionality to add:
 //1) customizable url address _/
 //2) add files to zip folder
 //3) allow get request from client to download zip folder
 //4) overwrite zip folder each time app is used
-//5) customizable file format 
+//5) customizable file format
 //6) allow for img downloading capability
 var request = require("request");
 var fs = require("fs");
 var cheerio = require('cheerio');
 var neDB = require('nedb');
+var zip = new require('node-zip')();
 
 var db = new neDB({
     filename: 'my.db',
@@ -17,10 +18,27 @@ var db = new neDB({
 
 var url;
 
-var formatLink = function(link) {
+//pretty ad hoc formatting based on what was encountered in testing
+var formatURL = function(url) {
+    var finalFewChars = url.substr(url.length-4);
+    if(finalFewChars == "html") {
+        url = url.split("/");
+        url.pop();
+        url = url.join("/");
+    }
     var finalChar = url.substr(url.length-1);
     if(finalChar != "/") {
         url += "/";
+    }
+    return url;
+}
+
+var formatLink = function(link) {
+    if(link.includes("./")) {
+        link = link.substr(2);
+    }
+    if(link.substr(0,1) == "/") {
+        link = link.substr(1);
     }
     if(!link.includes("http") && !link.includes("www")) {
         link = url + link;
@@ -40,7 +58,7 @@ var download_pdfs = function(counter, items) {
     } else {
         console.log("\nrequesting download\n");
         var link = items[counter].href;
-        //if last url character isn't /, add it, and check for http://www 
+        //if last url character isn't /, add it, and check for http://www
         link = formatLink(link);
 
         var options = {
@@ -61,7 +79,7 @@ var download_pdfs = function(counter, items) {
                 download_pdfs(counter-1, items);
             });
         }
-    }   
+    }
 }
 
 var main = function() {
@@ -80,19 +98,20 @@ exports.pdf_download = function(req,res) {
     });
     url = link;
     request(url, function(error,response,html) {
-    var $ = cheerio.load(html); // html is the raw response string : "<html><head>.."
-    var data = [];
-    $("a") // find every <a> in this html
-        .filter(function() {
-            var attr = $(this).attr("href");
-            var str = String(attr);
-            return str.includes("pdf");
-        }).each(function() {
-            var name = $(this).text(); // grab the name of the link
-            var href = $(this).attr("href"); //grab the link anchor href
-            data.push({ "name": name, "href": href});
-        });
-        
+        url = formatURL(url);
+        var $ = cheerio.load(html); // html is the raw response string : "<html><head>.."
+        var data = [];
+        $("a") // find every <a> in this html
+            .filter(function() {
+                var attr = $(this).attr("href");
+                var str = String(attr);
+                return str.includes("pdf");
+            }).each(function() {
+                var name = $(this).text(); // grab the name of the link
+                var href = $(this).attr("href"); //grab the link anchor href
+                data.push({ "name": name, "href": href});
+    });
+
     console.log(data);
     db.insert(data)
     console.log("Links saved to database");
