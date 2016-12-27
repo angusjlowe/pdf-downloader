@@ -16,6 +16,13 @@ var path = require('path');
 
 var appDir = path.dirname(require.main.filename);
 
+var directorySetUp = function() {
+   var dir = appDir + "/downloads";
+   if(!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+   }
+};
+
 var db = new neDB({
     filename: 'my.db',
     autoload: true
@@ -168,8 +175,8 @@ exports.zip_download = function(req,res) {
 };
 
 exports.home = function(req,res) {
+    directorySetUp();
     //check if in use
-    console.log(appDir + " hello");
     var isEmpty = false;
     db.find({}, function(err, docs) {
         if(docs.length == 0) {
