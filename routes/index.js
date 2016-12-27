@@ -29,7 +29,7 @@ var db = new neDB({
 
 var url;
 
-var files = [];
+var files;
 
 var zip_files = function(counter) {
    if(counter < 0) {
@@ -174,6 +174,8 @@ exports.zip_download = function(req,res) {
 };
 
 exports.home = function(req,res) {
+    //clean files
+    files = [];
     directorySetUp();
     //check if in use
     var isEmpty = false;
