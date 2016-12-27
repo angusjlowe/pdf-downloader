@@ -12,5 +12,6 @@ app.set('view engine', 'ejs');
 app.get('/', routes.home);
 
 app.post('/pdf_download', routes.pdf_download);
+app.get('/zip_download', routes.zip_download);
 app.listen(3000);
 console.log("Listening at port 3000");

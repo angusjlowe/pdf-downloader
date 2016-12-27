@@ -10,6 +10,8 @@ var fs = require("fs");
 var cheerio = require('cheerio');
 var neDB = require('nedb');
 var zip = new require('node-zip')();
+var file = require("file");
+var walk = require('walk');
 
 var db = new neDB({
     filename: 'my.db',
@@ -17,6 +19,22 @@ var db = new neDB({
 });
 
 var url;
+
+var files = [];
+
+var zip_files = function(counter) {
+   if(counter < 0) {
+      var data = zip.generate({base64:false,compression:'DEFLATE'});
+      fs.writeFileSync('files.zip', data, 'binary');
+   } else {
+      var data = fs.readFileSync(files[counter], 'binary');
+      var str = (counter + 1) + ".pdf";
+      zip.file(str, data, {binary:true});
+      zip_files(counter-1);
+      console.log("zipped file " + counter);
+      fs.unlink(files[counter]);
+   }
+}
 
 //pretty ad hoc formatting based on what was encountered in testing
 var formatURL = function(url) {
@@ -118,6 +136,27 @@ exports.pdf_download = function(req,res) {
     main();
     });
 };
+
+exports.zip_download = function(req,res) {
+   var walker = walk.walk('./downloads', {followLinks:false});
+   console.log("zip_download called");
+   walker.on('file', function(root, stat, next) {
+      console.log(stat);
+      console.log(root);
+      files.push(root + '/' + stat.name);
+      next();
+   });
+   walker.on("errors", function(root, stat, next) {
+    console.log(stat.error + "ERROR");
+    next();
+   });
+   walker.on('end', function() {
+      console.log(files);
+      var counter = files.length - 1;
+      zip_files(counter);
+      res.download('./files.zip');
+   });
+}
 
 exports.home = function(req,res) {
     //check if in use
