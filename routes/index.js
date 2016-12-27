@@ -12,6 +12,9 @@ var neDB = require('nedb');
 var zip = new require('node-zip')();
 var file = require("file");
 var walk = require('walk');
+var path = require('path');
+
+var appDir = path.dirname(require.main.filename);
 
 var db = new neDB({
     filename: 'my.db',
@@ -38,7 +41,7 @@ var zip_files = function(counter) {
 }
 
 var create_zip = function(res) {
-   var walker = walk.walk('./downloads', {followLinks:false});
+   var walker = walk.walk(appDir + '/downloads', {followLinks:false});
    console.log("create_zip called");
    walker.on('file', function(root, stat, next) {
       console.log(stat);
@@ -116,7 +119,7 @@ var download_pdfs = function(counter, items, res) {
         //make the download request and pipe to filestream
         var newReq;
         try {
-           newReq = request(options, callback).pipe(fs.createWriteStream("./downloads/" + name));
+           newReq = request(options, callback).pipe(fs.createWriteStream(appDir + "/downloads/" + name));
         }
         finally {
             newReq.on('finish', function() {
@@ -161,11 +164,12 @@ exports.pdf_download = function(req,res) {
 };
 
 exports.zip_download = function(req,res) {
-   res.download("./files.zip");
+   res.download(appDir + "/files.zip");
 };
 
 exports.home = function(req,res) {
     //check if in use
+    console.log(appDir + " hello");
     var isEmpty = false;
     db.find({}, function(err, docs) {
         if(docs.length == 0) {
