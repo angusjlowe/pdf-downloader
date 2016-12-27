@@ -41,7 +41,7 @@ var zip_files = function(counter) {
 }
 
 var create_zip = function(res) {
-   var walker = walk.walk(appDir + '/downloads', {followLinks:false});
+   var walker = walk.walk('/downloads', {followLinks:false});
    console.log("create_zip called");
    walker.on('file', function(root, stat, next) {
       console.log(stat);
@@ -119,7 +119,7 @@ var download_pdfs = function(counter, items, res) {
         //make the download request and pipe to filestream
         var newReq;
         try {
-           newReq = request(options, callback).pipe(fs.createWriteStream(appDir + "/downloads/" + name));
+           newReq = request(options, callback).pipe(fs.createWriteStream("/downloads/" + name));
         }
         finally {
             newReq.on('finish', function() {
@@ -164,7 +164,7 @@ exports.pdf_download = function(req,res) {
 };
 
 exports.zip_download = function(req,res) {
-   res.download(appDir + "/files.zip");
+   res.download("/files.zip");
 };
 
 exports.home = function(req,res) {
