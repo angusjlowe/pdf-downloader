@@ -28,13 +28,36 @@ var zip_files = function(counter) {
       fs.writeFileSync('files.zip', data, 'binary');
    } else {
       var data = fs.readFileSync(files[counter], 'binary');
-      var str = (counter + 1) + ".pdf";
+      var str = files[counter].split("/");
+      var str = str.pop();
       zip.file(str, data, {binary:true});
       zip_files(counter-1);
       console.log("zipped file " + counter);
       fs.unlink(files[counter]);
    }
 }
+
+var create_zip = function(res) {
+   var walker = walk.walk('./downloads', {followLinks:false});
+   console.log("create_zip called");
+   walker.on('file', function(root, stat, next) {
+      console.log(stat);
+      console.log(root);
+      files.push(root + '/' + stat.name);
+      next();
+   });
+   walker.on("errors", function(root, stat, next) {
+    console.log(stat.error + "ERROR");
+    next();
+   });
+   walker.on('end', function() {
+      console.log(files);
+      var counter = files.length - 1;
+      zip_files(counter);
+      res.render("zip_waiting", {});
+   });
+};
+
 
 //pretty ad hoc formatting based on what was encountered in testing
 var formatURL = function(url) {
@@ -65,7 +88,7 @@ var formatLink = function(link) {
 }
 
 
-var download_pdfs = function(counter, items) {
+var download_pdfs = function(counter, items, res) {
     if(counter < 0) {
         db.remove({}, { multi: true }, function (err,numRemoved) {
             db.loadDatabase(function (err) {
@@ -73,12 +96,14 @@ var download_pdfs = function(counter, items) {
             });
         });
         console.log("All finished");
+        create_zip(res);
     } else {
         console.log("\nrequesting download\n");
         var link = items[counter].href;
         //if last url character isn't /, add it, and check for http://www
         link = formatLink(link);
-
+        var name = link.split("/");
+        name = name.pop();
         var options = {
             uri: link,
             method: "GET"
@@ -90,30 +115,27 @@ var download_pdfs = function(counter, items) {
         //make the download request and pipe to filestream
         var newReq;
         try {
-           newReq = request(options, callback).pipe(fs.createWriteStream("./downloads/" + (items.length - counter) + ".pdf"));
+           newReq = request(options, callback).pipe(fs.createWriteStream("./downloads/" + name));
         }
         finally {
             newReq.on('finish', function() {
-                download_pdfs(counter-1, items);
+                download_pdfs(counter-1, items, res);
             });
         }
     }
 }
 
-var main = function() {
+var main = function(res) {
     var items = [];
     var counter = 0;
     db.find({}, function(err,docs) {
         counter = docs.length - 1;
-        download_pdfs(counter, docs)
+        download_pdfs(counter, docs, res)
     });
 }
 
 exports.pdf_download = function(req,res) {
     var link = req.body.link;
-    res.render("waiting_screen", {
-        link: link
-    });
     url = link;
     request(url, function(error,response,html) {
         url = formatURL(url);
@@ -133,30 +155,13 @@ exports.pdf_download = function(req,res) {
     console.log(data);
     db.insert(data)
     console.log("Links saved to database");
-    main();
+    main(res);
     });
 };
 
 exports.zip_download = function(req,res) {
-   var walker = walk.walk('./downloads', {followLinks:false});
-   console.log("zip_download called");
-   walker.on('file', function(root, stat, next) {
-      console.log(stat);
-      console.log(root);
-      files.push(root + '/' + stat.name);
-      next();
-   });
-   walker.on("errors", function(root, stat, next) {
-    console.log(stat.error + "ERROR");
-    next();
-   });
-   walker.on('end', function() {
-      console.log(files);
-      var counter = files.length - 1;
-      zip_files(counter);
-      res.download('./files.zip');
-   });
-}
+   res.download("./files.zip");
+};
 
 exports.home = function(req,res) {
     //check if in use
