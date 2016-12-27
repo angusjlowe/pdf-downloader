@@ -104,6 +104,7 @@ var download_pdfs = function(counter, items, res) {
         link = formatLink(link);
         var name = link.split("/");
         name = name.pop();
+        console.log(link);
         var options = {
             uri: link,
             method: "GET"
