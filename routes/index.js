@@ -6,7 +6,7 @@
 //5) customizable file format
 //6) allow for img downloading capability
 var request = require("request");
-var fs = require("fs");
+var fs = require("fs-extra");
 var cheerio = require('cheerio');
 var neDB = require('nedb');
 var zip = new require('node-zip')();
@@ -17,10 +17,9 @@ var path = require('path');
 var appDir = path.dirname(require.main.filename);
 
 var directorySetUp = function() {
-   var dir = appDir + "/downloads";
-   if(!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
-   }
+   fs.emptyDir(appDir + '/downloads', function (err) {
+     if (!err) console.log('success!')
+   });
 };
 
 var db = new neDB({
@@ -43,7 +42,6 @@ var zip_files = function(counter) {
       zip.file(str, data, {binary:true});
       zip_files(counter-1);
       console.log("zipped file " + counter);
-      fs.unlink(files[counter]);
    }
 }
 
