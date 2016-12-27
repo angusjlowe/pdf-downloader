@@ -1,8 +1,8 @@
 //functionality to add:
 //1) customizable url address _/
-//2) add files to zip folder
-//3) allow get request from client to download zip folder
-//4) overwrite zip folder each time app is used
+//2) add files to zip folder _/
+//3) allow get request from client to download zip folder _/
+//4) overwrite zip folder each time app is used _/
 //5) customizable file format
 //6) allow for img downloading capability
 var request = require("request");
