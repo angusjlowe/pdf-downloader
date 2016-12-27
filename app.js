@@ -13,5 +13,5 @@ app.get('/', routes.home);
 
 app.post('/pdf_download', routes.pdf_download);
 app.get('/zip_download', routes.zip_download);
-app.listen(3000);
-console.log("Listening at port 3000");
+app.listen(process.env.PORT || 3000);
+console.log("Listening");
