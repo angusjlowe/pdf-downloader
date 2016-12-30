@@ -20,6 +20,7 @@ var directorySetUp = function() {
    fs.emptyDir(appDir + '/downloads', function (err) {
      if (!err) console.log('success!')
    });
+   fs.unlinkSync(appDir + '/files.zip');
 };
 
 var db = new neDB({
@@ -174,9 +175,6 @@ exports.zip_download = function(req,res) {
 };
 
 exports.home = function(req,res) {
-    //clean files
-    files = [];
-    directorySetUp();
     //check if in use
     var isEmpty = false;
     db.find({}, function(err, docs) {
@@ -185,13 +183,16 @@ exports.home = function(req,res) {
         }
         console.log("Length of database: " + docs.length);
         if(isEmpty) {
-            res.render("home", {});
             //reload database upon each refresh to ensure valid state
             db.remove({}, { multi: true }, function (err,numRemoved) {
                 db.loadDatabase(function (err) {
                     // done
                 });
             });
+            //clean files
+            files = [];
+            directorySetUp();
+            res.render("home", {});
         } else {
             res.send("Sorry we're busy, please try again later");
         }
